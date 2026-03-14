@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-slate-900 font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400;
+  }
+
+  /* Upload zone drag state */
+  .upload-zone {
+    @apply border-2 border-dashed border-slate-200 rounded-2xl transition-all duration-300 cursor-pointer bg-white/50 backdrop-blur-sm;
+  }
+  .upload-zone:hover,
+  .upload-zone.drag-over {
+    @apply border-indigo-400 bg-indigo-50/50 animate-pulse-border shadow-md shadow-indigo-100/50;
+  }
+
+  /* Section header */
+  .section-label {
+    @apply text-[11px] font-bold tracking-[0.25em] text-slate-400 uppercase mb-8 flex items-center gap-3;
+  }
+
+  /* Minimalist Skill pill */
+  .skill-pill {
+    @apply font-mono text-xs bg-transparent text-slate-600 border border-slate-200 rounded-md px-3 py-1.5 inline-block transition-colors duration-200;
+  }
+  .skill-pill:hover {
+    @apply border-slate-900 text-slate-900 bg-slate-50;
+  }
+
+  /* Minimalist Tech pill */
+  .tech-pill {
+    @apply font-mono text-[11px] bg-transparent text-slate-500/80 inline-block transition-colors;
+  }
+  .group:hover .tech-pill {
+    @apply text-slate-700;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+}
