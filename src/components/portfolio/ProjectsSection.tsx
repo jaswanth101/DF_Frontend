@@ -1,5 +1,5 @@
 import { ProjectItem } from '../../types/portfolio'
-import { Github, ExternalLink } from 'lucide-react'
+import { Github, ExternalLink, Calendar, Briefcase } from 'lucide-react'
 
 interface Props {
   projects: ProjectItem[]
@@ -10,6 +10,24 @@ export default function ProjectsSection({ projects }: Props) {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-12">
       {projects.map((project, i) => (
         <div key={i} className="group flex flex-col gap-3">
+          {/* Timeline & Context badges */}
+          {(project.start_date || project.end_date || project.context) && (
+            <div className="flex flex-wrap gap-2 -mb-1">
+              {(project.start_date || project.end_date) && (
+                <span className="inline-flex items-center gap-1 text-[11px] font-bold tracking-widest uppercase text-slate-400">
+                  <Calendar className="w-3 h-3" />
+                  {[project.start_date, project.end_date].filter(Boolean).join(' – ')}
+                </span>
+              )}
+              {project.context && (
+                <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-400">
+                  <Briefcase className="w-3 h-3" />
+                  {project.context}
+                </span>
+              )}
+            </div>
+          )}
+
           {/* Title row */}
           <div className="flex items-start justify-between gap-3">
             <h3 className="font-bold text-slate-900 text-[17px] tracking-tight leading-tight group-hover:text-black transition-colors">

@@ -16,13 +16,20 @@ export default function EducationSection({ education }: Props) {
               </p>
             </div>
           )}
-          <h3 className="font-bold text-slate-900 text-[17px] leading-snug tracking-tight group-hover:text-black transition-colors">{item.degree || 'Education'}</h3>
-          {item.institution && <p className="text-slate-600 font-semibold text-[15px] mt-1">{item.institution}</p>}
-          {item.cgpa && (
-            <div className="mt-3 text-slate-500 text-sm font-medium">
-              CGPA: {item.cgpa}
-            </div>
+          <h3 className="font-bold text-slate-900 text-[17px] leading-snug tracking-tight group-hover:text-black transition-colors">
+            {item.degree || item.institution || 'Education'}
+          </h3>
+          {item.degree && item.institution && (
+            <p className="text-slate-600 font-semibold text-[15px] mt-1">{item.institution}</p>
           )}
+          <div className="mt-3 flex gap-4 flex-wrap">
+            {item.cgpa && (
+              <span className="text-slate-500 text-sm font-medium">CGPA: {item.cgpa}</span>
+            )}
+            {item.percentage && (
+              <span className="text-slate-500 text-sm font-medium">Score: {item.percentage}</span>
+            )}
+          </div>
         </div>
       ))}
     </div>

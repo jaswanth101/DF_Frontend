@@ -31,12 +31,16 @@ export interface ProjectItem {
   tech_stack: string[];
   live_url: string | null;
   github_url: string | null;
+  start_date: string | null;
+  end_date: string | null;
+  context: string | null;
 }
 
 export interface EducationItem {
   institution: string | null;
   degree: string | null;
   cgpa: string | null;
+  percentage: string | null;
   start_date: string | null;
   end_date: string | null;
 }
@@ -52,6 +56,11 @@ export interface SkillGroup {
   items: string[];
 }
 
+export interface LanguageItem {
+  language: string;
+  proficiency: string | null;
+}
+
 export interface PortfolioData {
   username: string;
   personal_info: PersonalInfo;
@@ -61,4 +70,6 @@ export interface PortfolioData {
   education: EducationItem[];
   certifications: CertificationItem[];
   achievements: string[];
+  languages: LanguageItem[];
+  additional_info: string[];
 }

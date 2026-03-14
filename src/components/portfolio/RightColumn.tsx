@@ -5,6 +5,8 @@ import ProjectsSection from './ProjectsSection'
 import EducationSection from './EducationSection'
 import CertificationsSection from './CertificationsSection'
 import AchievementsSection from './AchievementsSection'
+import LanguagesSection from './LanguagesSection'
+import AdditionalInfoSection from './AdditionalInfoSection'
 
 interface Props {
   data: PortfolioData
@@ -52,6 +54,20 @@ export default function RightColumn({ data }: Props) {
         <section>
           <p className="section-label">Certifications</p>
           <CertificationsSection certifications={data.certifications} />
+        </section>
+      )}
+
+      {data.languages && data.languages.length > 0 && (
+        <section>
+          <p className="section-label">Languages</p>
+          <LanguagesSection languages={data.languages} />
+        </section>
+      )}
+
+      {data.additional_info && data.additional_info.length > 0 && (
+        <section>
+          <p className="section-label">Additional Information</p>
+          <AdditionalInfoSection items={data.additional_info} />
         </section>
       )}
     </main>
