@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { PortfolioData } from '../types/portfolio'
 import LeftColumn from '../components/portfolio/LeftColumn'
 import RightColumn from '../components/portfolio/RightColumn'
+import AssistantChat from '../components/portfolio/AssistantChat'
 import { Zap, ArrowLeft } from 'lucide-react'
 
 export default function Portfolio() {
@@ -111,6 +112,8 @@ export default function Portfolio() {
           <RightColumn data={data} />
         </div>
       </div>
+
+      <AssistantChat data={data} />
     </div>
   )
 }
