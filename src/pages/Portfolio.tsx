@@ -12,14 +12,41 @@ export default function Portfolio() {
   const [notFound, setNotFound] = useState(false)
 
   useEffect(() => {
+    let cancelled = false
     if (!username) { setNotFound(true); return }
-    const stored = sessionStorage.getItem(`portfolio_${username}`)
-    if (!stored) { setNotFound(true); return }
-    try {
-      setData(JSON.parse(stored) as PortfolioData)
-    } catch {
-      setNotFound(true)
+
+    const normalized = username.toLowerCase()
+    const stored = sessionStorage.getItem(`portfolio_${normalized}`)
+    if (stored) {
+      try {
+        setData(JSON.parse(stored) as PortfolioData)
+      } catch {
+        sessionStorage.removeItem(`portfolio_${normalized}`)
+      }
     }
+
+    const loadProfile = async () => {
+      try {
+        const res = await fetch(`/api/profiles/${encodeURIComponent(normalized)}`)
+        if (res.status === 404) {
+          if (!stored && !cancelled) setNotFound(true)
+          return
+        }
+        const json = await res.json()
+        if (!res.ok) {
+          throw new Error(json.detail || 'Failed to load profile.')
+        }
+        if (!cancelled) {
+          setData(json.data as PortfolioData)
+          sessionStorage.setItem(`portfolio_${normalized}`, JSON.stringify(json.data))
+        }
+      } catch {
+        if (!stored && !cancelled) setNotFound(true)
+      }
+    }
+
+    loadProfile()
+    return () => { cancelled = true }
   }, [username])
 
   if (notFound) {
